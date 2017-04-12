@@ -1,3 +1,33 @@
+// Example 1: sets up service wrapper, sends initial message, and
+// receives response.
+
+var ConversationV1 = require('watson-developer-cloud/conversation/v1');
+
+// Set up Conversation service wrapper.
+var conversation = new ConversationV1({
+  username: '7027a447-837b-4ccb-827a-4798a09ca0a0', // replace with username from service key
+  password: 'G667oLABs4Kp', // replace with password from service key
+  path: { workspace_id: '2d540c47-7de4-4dda-a306-7a39d21d3430' }, // replace with workspace ID
+});
+
+// Start conversation with empty message.
+conversation.message({}, processResponse);
+
+// Process the conversation response.
+function processResponse(err, response) {
+  if (err) {
+    console.error(err); // something went wrong
+    return;
+  }
+  
+  // Display the output from dialog, if any.
+  if (response.output.text.length != 0) {
+      console.log(response.output.text[0]);
+  }
+}
+
+
+
 /**
  * Module dependencies.
  */
